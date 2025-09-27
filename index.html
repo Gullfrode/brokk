@@ -11,39 +11,61 @@
       margin: 0 auto;
       padding: 1rem;
       line-height: 1.5;
-    }
-    h1, h2 {
       text-align: center;
     }
-    iframe {
-      display: block;
-      margin: 2rem auto;
+    h1 {
+      margin-bottom: 2rem;
+    }
+    .btn-group {
+      margin-bottom: 1.5rem;
+    }
+    button {
+      background: #0366d6;
       border: none;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      color: white;
+      padding: 0.7rem 1.2rem;
+      margin: 0 0.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.2s;
+    }
+    button:hover {
+      background: #024a9c;
+    }
+    iframe {
+      width: 100%;
+      max-width: 1024px;
+      height: 1000px;
+      border: none;
       border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin: 0 auto;
+      display: block;
     }
   </style>
 </head>
 <body>
   <h1>Power BI-rapporter</h1>
 
-  <h2>Eierbrøk tidslinje</h2>
-  <iframe 
-    title="Eierbrøk tidslinje" 
-    width="900" 
-    height="1500" 
-    src="https://app.powerbi.com/view?r=eyJrIjoiODRjZTQ2MGUtODc0OC00YTNiLWJhMWUtM2U0YjgwZWU2ZWExIiwidCI6Ijc1MjRkNjYyLTg3MWQtNDcwNS1iNDdlLWM5ZWY1MGQ0NWM2NyIsImMiOjh9" 
-    allowfullscreen="true">
-  </iframe>
+  <div class="btn-group">
+    <button onclick="loadReport('tidslinje')">Tidslinje</button>
+    <button onclick="loadReport('modeller')">Modeller</button>
+  </div>
 
-  <h2>Brøk modeller</h2>
-  <iframe 
-    title="Brøk modeller" 
-    width="1024" 
-    height="1060" 
-    src="https://app.powerbi.com/view?r=eyJrIjoiOWYwMzIyYzAtYzY0NC00MDI5LWJiYWQtYWY5ZjI1ZjhlMTVlIiwidCI6Ijc1MjRkNjYyLTg3MWQtNDcwNS1iNDdlLWM5ZWY1MGQ0NWM2NyIsImMiOjh9" 
-    allowfullscreen="true">
-  </iframe>
+  <iframe id="pbiFrame" allowfullscreen="true"></iframe>
 
+  <script>
+    const reports = {
+      tidslinje: "https://app.powerbi.com/view?r=eyJrIjoiODRjZTQ2MGUtODc0OC00YTNiLWJhMWUtM2U0YjgwZWU2ZWExIiwidCI6Ijc1MjRkNjYyLTg3MWQtNDcwNS1iNDdlLWM5ZWY1MGQ0NWM2NyIsImMiOjh9",
+      modeller: "https://app.powerbi.com/view?r=eyJrIjoiOWYwMzIyYzAtYzY0NC00MDI5LWJiYWQtYWY5ZjI1ZjhlMTVlIiwidCI6Ijc1MjRkNjYyLTg3MWQtNDcwNS1iNDdlLWM5ZWY1MGQ0NWM2NyIsImMiOjh9"
+    };
+
+    function loadReport(name) {
+      document.getElementById("pbiFrame").src = reports[name];
+    }
+
+    // Last inn standardrapport når siden åpnes
+    loadReport('tidslinje');
+  </script>
 </body>
-</html>
